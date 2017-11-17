@@ -15,13 +15,20 @@ def get_all_mentors():
 def get_mentor(user):
     conn = sqlite3.connect(db_conf['name'])
     cursor = conn.cursor()
-    mentors = []
+    mentors = ''
     user = user.split(' ')
-    for i in range(len(user)):
-        cursor.execute('SELECT name, lastname, language, languages FROM Mentors WHERE {} LIKE "{}"'.format( \
-            db_conf['tables_for_search'][i], str(user[i])))
-        mentors.append(cursor.fetchall())
+    if len(user) == 2:
+        cursor.execute('SELECT name, lastname, language, languages FROM Mentors WHERE {}="{}" AND {}="{}"'.format( \
+            db_conf['tables_for_search'][0], str(user[0]), db_conf['tables_for_search'][1], str(user[1])))
+        mentors = cursor.fetchall()
+    elif len(user) == 1:
+        cursor.execute('SELECT name, lastname, language, languages FROM Mentors WHERE {}="{}" OR {}="{}"'.format(
+            db_conf['tables_for_search'][0], str(user[0]), db_conf['tables_for_search'][1], str(user[0])))
+        mentors = cursor.fetchall()
 
     cursor.close()
     conn.close()
-    return str(mentors)
+    card_mentor = '''
+Ментор: <strong>{}</strong> 
+'''.format(mentors)
+    return str(card_mentor)
