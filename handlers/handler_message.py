@@ -19,8 +19,7 @@ def message_processing(bot, update):
     if _user_name == '':
         global _user_name
         _user_name = update._effective_message.text
-        bot.sendMessage(chat_id=update.message.chat_id, \
-                        text=username['success_get_name'], reply_markup=start_buttons())
+        start_buttons(bot, update, 0, username['success_get_name'])
     else:
         if update._effective_message.text != 'Найти':
             global _search

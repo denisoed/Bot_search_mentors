@@ -5,7 +5,6 @@
 *.log
 .pyo
 __pycache__
-db.sqlite3
 .DS_Store
 .migrations/
 secret.py

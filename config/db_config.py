@@ -1,4 +1,5 @@
 db_conf = {
     'name': 'mentors.sqlite',
-    'tables_for_search': ['name', 'lastname']
+    'table_name_for_mentors': 'Mentors',
+    'columns_for_search': ['name', 'lastname']
 }
