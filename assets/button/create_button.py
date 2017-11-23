@@ -33,3 +33,9 @@ def help_slide_btn(bot, update, item, message):
     send = bot.sendMessage(chat_id=update.message.chat_id,
                            text=messages.handler_reply_button[item]['text'], reply_markup=reply_markup)
     return send
+
+# Yet mentors
+def slide_mentors(bot, update, item, message):
+    button_list = [InlineKeyboardButton("Еще", callback_data='yet')]
+    btn = InlineKeyboardMarkup([button_list])
+    return btn

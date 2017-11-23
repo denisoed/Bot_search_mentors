@@ -10,13 +10,25 @@ dispatcher = updater.dispatcher
 logging.basicConfig(level=logging.DEBUG, \
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
+# handler send command(=> /start <=)
 updater.dispatcher.add_handler(CommandHandler('start', hello))
-updater.dispatcher.add_handler( \
-    MessageHandler(Filters.text, message_processing))
+
+# handler send message
+updater.dispatcher.add_handler(MessageHandler(Filters.text, message_processing))
 
 # handler click button
-updater.dispatcher.add_handler( \
-    CallbackQueryHandler(button_processing))
+updater.dispatcher.add_handler(CallbackQueryHandler(button_processing))
 
 updater.start_polling()
 updater.idle()
+
+# (''')о___о(''')
+#  \ ' (о_о) / /
+#   \ \ _Ш_ / /
+#    | . . . |
+#    | . . . |
+#    /./o|o\.\
+#   / /  u  \ \
+# („„„)     („„„)
+# Я мишка, мишки, мишка,
+#    Я менторов ищу!

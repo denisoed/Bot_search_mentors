@@ -1,3 +1,7 @@
+from telegram import ParseMode
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
+import math
+
 def create_mentor_card(db_data):
     card_mentor = '''
 <strong>{} {}</strong> \n
@@ -12,3 +16,6 @@ def create_mentor_card(db_data):
         db_data[4], \
         db_data[4])
     return card_mentor
+
+def create_all_mentor_card(bot, update, item, mentors):
+    pass

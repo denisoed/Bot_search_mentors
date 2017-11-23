@@ -45,6 +45,6 @@ def get_mentor(user_data):
             else:
                 return create_mentor_card(mentor[0])
         elif len(user) == 0:
-            return 'Введите данные'        
+            return 'Введите данные'
         else:
             return 'Пожалуйста введите корректные данные'
