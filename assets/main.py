@@ -1,7 +1,8 @@
 from handlers.handler_db_queries import get_mentor, all_mentors
 from .message.create_message import create_mentor_card, create_all_mentor_card
 from telegram import ParseMode
-from .button.create_button import slide_mentors
+from .button.create_button import slide_mentors, send_question, start_buttons
+from . import messages
 import math
 
 _MAIN_GLOB_VAR = {
@@ -32,14 +33,15 @@ def get_all_mentors(bot, update, item, message):
     
     if message == 'Все менторы':
         bot.send_message(chat_id=update.message.chat_id, \
-                         text=str(get_pages()[0]), \
+                         text=messages.mentors_card(get_pages()[0]),
                          reply_markup=slide_mentors(bot, update, item, message))
         _MAIN_GLOB_VAR['counter_output_mentors'] += 1
 
     elif message == 'yet':
         try:
             bot.send_message(chat_id=update.callback_query.message.chat_id, \
-                            text=str(get_pages()[_MAIN_GLOB_VAR['counter_output_mentors']]), \
+                             text=messages.mentors_card(
+                                 get_pages()[_MAIN_GLOB_VAR['counter_output_mentors']]),
                             reply_markup=slide_mentors(bot, update, item, message))
             _MAIN_GLOB_VAR['counter_output_mentors'] += 1
         except IndexError:
@@ -55,14 +57,11 @@ def searching_mentor(bot, update, item, message):
 def creating_question(bot, update, item, message):
     global _QUESTION
     if _QUESTION['lang'] == '':
-        _QUESTION['lang'] = str(message)
+        _QUESTION['lang'] = message
         bot.sendMessage(chat_id=update.message.chat_id,
                         text='Опишите коротко свой вопрос', parse_mode=ParseMode.HTML)
-    elif _QUESTION['question'] == '':
-        _QUESTION['question'] = str(message)
+    if _QUESTION['question'] == '':
+        _QUESTION['question'] = message
         bot.sendMessage(chat_id=update.message.chat_id,
-                        text='Готово!', parse_mode=ParseMode.HTML)
-    else:
-        bot.sendMessage(chat_id=update.message.chat_id,
-                        text=_QUESTION, parse_mode=ParseMode.HTML)
-
+                        text=messages.question_card(_QUESTION), parse_mode=ParseMode.HTML)
+        start_buttons(bot, update, item, message)
