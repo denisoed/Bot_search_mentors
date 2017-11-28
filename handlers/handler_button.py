@@ -2,7 +2,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMa
 from assets.messages import handler_inline_button
 
 
-# Handler click button
+# Handler click inline button
 def button_processing(bot, update):
     query = update.callback_query.data
     for item in range(len(handler_inline_button)):
