@@ -8,9 +8,8 @@ _MESSAGE = ''
 
 # Start function
 def hello(bot, update):
-    create_button.start_buttons(
-        bot, update, 0, messages.message_instruction['success_get_name'])
-    update.message.reply_text(text=messages.message_instruction['get_name'])
+    create_button.start_buttons( \
+        bot, update, 0, messages.message_instruction['start_btn_instruction'])
 
 
 # Handler incoming messages
@@ -19,6 +18,8 @@ def message_processing(bot, update):
     if update._effective_message.text == 'Найти':
         run(bot, update, btn_callback_msg)
     elif update._effective_message.text == 'Дальше':
+        run(bot, update, btn_callback_msg)
+    elif update._effective_message.text == 'Назад':
         run(bot, update, btn_callback_msg)
     else:
         global _MESSAGE

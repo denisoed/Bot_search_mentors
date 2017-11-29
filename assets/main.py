@@ -49,6 +49,7 @@ def get_all_mentors(bot, update, item, message):
         except IndexError:
             bot.send_message(chat_id=update.callback_query.message.chat_id, \
                             text='Больше нету!')
+            _MAIN_GLOB_VAR['counter_output_mentors'] = 0
 
 
 def searching_mentor(bot, update, item, message):
@@ -74,5 +75,15 @@ def creating_question(bot, update, item, message):
         _QUESTION['lang'] = message
         bot.sendMessage(chat_id=update.message.chat_id,
                         text=create_message.question_card(_QUESTION), parse_mode=ParseMode.HTML)
-        message = messages.question_data['data']                
+        message = messages.question_data['done']                
         create_button.start_buttons(bot, update, item, message)
+
+
+def get_prev(bot, update, item, message):
+    global _QUESTION
+    question_data = list(_QUESTION)
+    for i in range(len(question_data)):
+        if _QUESTION[question_data[i]] == '':
+            _QUESTION[question_data[i -1]] = ''
+            creating_question(bot, update, item, message)
+            return True
