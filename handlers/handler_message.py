@@ -3,7 +3,6 @@ from assets.button import create_button
 
 
 # Necessary variables
-_USER_NANE = ''
 _MESSAGE = ''
 
 # Start function

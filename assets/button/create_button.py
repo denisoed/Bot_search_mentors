@@ -9,7 +9,7 @@ def start_buttons(bot, update, item, messages):
     keyboard = [[fast_search, help_btn]]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
     send = bot.sendMessage(chat_id=update.message.chat_id,
-                           text=messages, reply_markup=reply_markup)
+                           text=messages, reply_markup=reply_markup) 
     return send
 
 # Button to start serching mentors

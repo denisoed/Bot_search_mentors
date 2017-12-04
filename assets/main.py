@@ -81,9 +81,9 @@ def creating_question(bot, update, item, message):
 
 def get_prev(bot, update, item, message):
     global _QUESTION
-    question_data = list(_QUESTION)
-    for i in range(len(question_data)):
-        if _QUESTION[question_data[i]] == '':
-            _QUESTION[question_data[i -1]] = ''
+    question_keys = list(_QUESTION)
+    for i in range(len(question_keys)):
+        if _QUESTION[question_keys[i]] == '':
+            _QUESTION[question_keys[i -1]] = ''
             creating_question(bot, update, item, message)
             return True
